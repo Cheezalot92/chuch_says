@@ -38,3 +38,18 @@ function generateCategoryList(categoryMilk) {
     // append the <select> to the <form>
     categoryListFormEl.append(selectEl);
 }
+
+categoryListFormEl.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const category5 = this.querySelector('select').value;
+    const apiUrl = `https://api.chucknorris.io/jokes/random?category=${category5}`;
+    get(apiUrl).then(function (response){
+        console.log('RESPONSE' , response)
+        showQuote(response.value , chuckQuote);
+})});
+
+function generateQuote(apiUrl) {
+    get(apiUrl).then(function(response){
+        showQuote(response.value, chuckQuote);
+    })
+}
